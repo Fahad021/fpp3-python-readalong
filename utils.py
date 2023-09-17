@@ -33,8 +33,7 @@ def summarize(gb, f):
 def compute(df, f):
     """Compute new (or replacement) columns."""
     newdf = pd.DataFrame(f(df), index=df.index)
-    dropcols = [col for col in newdf.columns if col in df.columns]
-    if dropcols:
+    if dropcols := [col for col in newdf.columns if col in df.columns]:
         df = df.drop(columns=dropcols)
     return df.join(newdf)
 
